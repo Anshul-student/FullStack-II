@@ -1,14 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router'
-function NavBar() {
+import { NavLink } from "react-router";
+
+function NavBar({ user, onLogout }) {
   return (
-      <div>
-          <h4>Student Management System | </h4>
-          <Link to="/">Home |</Link>
-          <Link to="/dashboard">Dashboard |</Link>
-          <Link to="/login">Login</Link>        
-    </div>
-  )
+    <nav>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/dashboard">Dashboard</NavLink>
+      {user ? (
+        <>
+          <span className="nav-user">Welcome, {user.username}</span>
+          <button type="button" className="btn logout-btn" onClick={onLogout}>
+            Logout
+          </button>
+        </>
+      ) : (
+        <NavLink to="/login">Login</NavLink>
+      )}
+    </nav>
+  );
 }
 
-export default NavBar
+export default NavBar;
